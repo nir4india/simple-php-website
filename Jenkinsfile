@@ -21,6 +21,14 @@ node {
           sh "${scannerHome}/bin/sonar-scanner -D sonar.projectKey=${projectKey}  -D sonar.sources=. -D sonar.host.url='http://35.154.197.67:9000/' -D sonar.exclusions=bootstrap/**,config/**,database/**,docker/**,public/**,storage/**,tests/**,vendor/**"
           stash includes: ".sonar/report-task.txt", name: 'sonar'
         }
+ 
   }
 
+    stage("Quality Gate Status Check"){
+          sh 'sleep 20'
+             def qg = waitForQualityGate()
+             if (qg.status == 'OK') {
+                echo "success"
+             }
+    
 }
