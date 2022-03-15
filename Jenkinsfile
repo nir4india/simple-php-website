@@ -25,7 +25,7 @@ node {
   }
 
     stage("Quality Gate Status Check"){
-          sh 'sleep 20'
+          //sh 'sleep 20'
              def qg = waitForQualityGate()
              if (qg.status == 'OK') {
                 echo "success"
